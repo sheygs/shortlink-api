@@ -9,23 +9,27 @@
     "prettify:check": "prettier --check \"**/*.ts\"",
     "lint:check": "eslint --ignore-path .eslintignore \"src/**/*.ts\"",
     "lint:fix": "eslint --ignore-path .eslintignore \"src/**/*.ts\" --fix",
-    "dev": "ts-node-dev ./src/index.ts",
     "prebuild": "rm -rf build",
     "build": "npx tsc",
+    "dev": "cross-env NODE_ENV=development ts-node-dev ./src/index.ts",
     "prod": "npm run prebuild && npm run build && node build/index.js",
-    "test": "jest --runInBand --forceExit",
+    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
     "precommit": "npm-run-all --sequential lint:fix prettify test",
     "prepush": "npm run lint:check"
   },
   "keywords": [
     "short link",
-    "url shortener"
+    "url shortener",
+    "encode",
+    "decode"
   ],
   "author": "Olusegun Ekoh",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-rate-limit": "^7.0.2",

@@ -1,20 +1,20 @@
 {
-        "env": {
-                "es2021": true,
-                "node": true
-        },
-        "extends": "standard-with-typescript",
-        "parserOptions": {
-                "ecmaVersion": "latest",
-                "sourceType": "module"
-        },
-        "rules": {
-                "@typescript-eslint/no-unused-vars": "error",
-                "@typescript-eslint/semi": "off",
-                "@typescript-eslint/no-explicit-any": "off",
-                "@typescript-eslint/explicit-function-return-type":"",
-                // With this configuration, ESLint will raise an error if you use a type definition (e.g., type) instead of an interface for defining TypeScript types
-                // You can adjust this configuration to "type" if you prefer to use type instead of interface for type definitions:
-                "@typescript-eslint/consistent-type-definitions": ["error", "interface"]
-        }
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": 0,
+    // With this configuration, ESLint will raise an error if you use a type definition (e.g., type) instead of an interface for defining TypeScript types
+    // You can adjust this configuration to "type" if you prefer to use type instead of interface for type definitions:
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"]
+  }
 }
