@@ -10,19 +10,24 @@ long URL. Using the example above, visiting `http://short.est/GeAi9K` should red
 
 ### Features
 
-- `/encode`: Encode a URL to a shortened URL
-- `/decode`: Decodes a shortened URL to its original URL
-- `/statistic/{url_path}`: Return the basic statistics of a short URL path. Using the above link, `url_path` will be `GeAi9K`.
+- `encode`: Encode a URL to a shortened URL
+- `decode`: Decodes a shortened URL to its original URL
+- `statistic/{url_path}`: Return the basic statistics of a short URL path. Using the above link, `url_path` will be `GeAi9K`.
 
 ### Tech Stack
 
-- Node.js
-- Express
-- Jest
+- [Node.js](https://nodejs.org/en/download/current)
+- [Express](https://www.npmjs.com/package/express)
+- [Jest](https://www.npmjs.com/package/jest)
+- Persisted in memory
 
 ### Evaluation Criteria
 
 - Best Practices
 - SOLID principles
 - Clean Code
-- Tests
+- Tests - (Unit/Integration)
+
+### Timeline
+
+- 1 week
