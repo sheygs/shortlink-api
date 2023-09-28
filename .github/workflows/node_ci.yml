@@ -1,0 +1,33 @@
+name: Node.js CI
+
+on: [push, pull_request]
+
+permissions:
+  contents: read #  to fetch code (actions/checkout)
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci --ignore-scripts
+      - run: npm run prettify:check
+      - run: npm run lint:check
+
+  test:
+    strategy:
+      matrix:
+        node-version: [16, 18]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm --version
+      - run: npm ci --ignore-scripts
+      #- run: npm test

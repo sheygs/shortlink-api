@@ -2,7 +2,7 @@
 
 > ShortLink is a URL shortening service.
 
-### Brief
+### Overview
 
 ShortLink is a URL shortening service where you enter a URL such as `https://indicina.co` and it returns
 a short URL such as `http://short.est/GeAi9K`. Visiting the shortened URL should redirect the user to the
@@ -16,10 +16,10 @@ long URL. Using the example above, visiting `http://short.est/GeAi9K` should red
 
 ### Tech Stack
 
+- [TypeScript](https://www.typescriptlang.org/)
 - [Node.js](https://nodejs.org/en/download/current)
 - [Express](https://www.npmjs.com/package/express)
 - [Jest](https://www.npmjs.com/package/jest)
-- Persisted in memory
 
 ### Evaluation Criteria
 
