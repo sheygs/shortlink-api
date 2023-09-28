@@ -12,10 +12,10 @@
     "dev": "ts-node-dev ./src/index.ts",
     "prebuild": "rm -rf build",
     "build": "npx tsc",
-    "precommit": "npm run lint:fix && npm run prettify",
-    "prepush": "npm run lint:check",
     "prod": "npm run prebuild && npm run build && node build/index.js",
-    "test": "jest --runInBand --forceExit"
+    "test": "jest --runInBand --forceExit",
+    "precommit": "npm-run-all --sequential lint:fix prettify test",
+    "prepush": "npm run lint:check"
   },
   "keywords": [
     "short link",
@@ -52,6 +52,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.0.3",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
