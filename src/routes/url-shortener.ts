@@ -1,10 +1,10 @@
 import { Router } from 'express';
+import ShortUrlController from '../controllers/url-shortener';
 
-const ShortLinkRouter = Router();
+const ShortUrlRouter = Router();
 
-// eslint-disable-next-line spaced-comment
-ShortLinkRouter.route('/encode').post(/*ShortLinkController.encode*/);
-// eslint-disable-next-line spaced-comment
-ShortLinkRouter.route('/decode').post(/*ShortLinkController.decode*/);
+ShortUrlRouter.route('/encode').post(ShortUrlController.encode);
 
-export default ShortLinkRouter;
+ShortUrlRouter.route('/decode').get(ShortUrlController.decode);
+
+export default ShortUrlRouter;

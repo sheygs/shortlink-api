@@ -6,7 +6,7 @@ import {
 } from 'express';
 
 import { type APIError } from '../exceptions/index';
-import { type HttpStatusCode } from '../interfaces/types';
+import { HttpStatusCode } from '../interfaces/types';
 import { errorHandler } from '../exceptions/error-handler';
 import { errorResponse } from '../helpers/response';
 import logger from '../helpers/logger';
@@ -17,7 +17,8 @@ export const globalErrorHandler = (app: Application) =>
 
     logger.info(JSON.stringify({ isTrusted }));
 
-    const statusCode: HttpStatusCode = error.httpStatusCode ?? 400;
+    const statusCode: HttpStatusCode =
+      error.httpStatusCode ?? HttpStatusCode.BAD_REQUEST;
 
     errorResponse(error, res, statusCode);
   });

@@ -5,6 +5,7 @@ class ErrorHandler {
     if (error instanceof APIError) {
       return error.isOperational;
     }
+
     return false;
   }
 }

@@ -1,12 +1,12 @@
 import winston, { format, transports } from 'winston';
-import config from '../config/config';
+import config from '../config';
 const { combine, printf } = format;
 
 const formatOptions: {
   format: winston.Logform.Format;
 } = {
   format: combine(
-    config.environment !== 'production' ? format.simple() : format.json(),
+    config.ENV !== 'production' ? format.simple() : format.json(),
 
     printf(({ level, message }) => {
       const today = new Date();
@@ -19,15 +19,13 @@ const formatOptions: {
   )
 };
 
-const infoTransport = new transports.Console({ level: 'info' });
-
 const logger: winston.Logger = winston.createLogger({
   ...formatOptions,
   transports: [
     // - Write all logs with level `error` and below to `error.log`
     // - Write all logs with level `info` and below to console
     new transports.File({ filename: 'error.log', level: 'error' }),
-    infoTransport
+    new transports.Console({ level: 'info' })
   ]
 });
 

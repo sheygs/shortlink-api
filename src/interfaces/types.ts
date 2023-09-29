@@ -1,9 +1,3 @@
-export interface Environment {
-  DEVELOPMENT: 'development';
-  TEST: 'test';
-  PRODUCTION: 'production';
-}
-
 export enum Status {
   FAILURE = 'failure',
   SUCCESS = 'success'
@@ -22,4 +16,11 @@ export enum HttpStatusCode {
   SERVICE_UNAVAILABLE = 503,
   REQUEST_TIMEOUT = 408,
   CONFLICT = 409
+}
+
+export interface IUrl {
+  id: string;
+  longUrl: string;
+  shortUrl: string;
+  dateCreated: Date;
 }
