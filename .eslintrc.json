@@ -13,6 +13,16 @@
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "ignore",
+        "named": "ignore",
+        "asyncArrow": "ignore"
+      }
+    ],
+    "@typescript-eslint/strict-boolean-expressions": "off",
     // With this configuration, ESLint will raise an error if you use a type definition (e.g., type) instead of an interface for defining TypeScript types
     // You can adjust this configuration to "type" if you prefer to use type instead of interface for type definitions:
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"]

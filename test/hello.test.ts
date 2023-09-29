@@ -1,4 +1,4 @@
-import { sayHello } from '../src/utils';
+import { sayHello } from '../src/helpers/utils';
 
 describe('Say Hello', () => {
   it('should return "Hello JavaScript"', () => {

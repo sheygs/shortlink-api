@@ -21,6 +21,10 @@ long URL. Using the example above, visiting `http://short.est/GeAi9K` should red
 - [Express](https://www.npmjs.com/package/express)
 - [Jest](https://www.npmjs.com/package/jest)
 
+### Installation
+
+### Documentation
+
 ### Evaluation Criteria
 
 - Best Practices
