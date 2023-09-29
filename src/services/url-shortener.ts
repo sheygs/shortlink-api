@@ -2,7 +2,7 @@ import { type IUrl } from '../interfaces/types';
 import {
   generateTinyUrl,
   isValidUrl,
-  isTinyUrl,
+  isValidShortUrl,
   generateUUID
 } from '../helpers/utils';
 import { BadRequestException, NotFoundException } from '../exceptions/index';
@@ -18,7 +18,7 @@ class ShortUrlService {
     }
 
     // verify that request url is not an encoded one
-    if (isTinyUrl(longUrl)) {
+    if (isValidShortUrl(longUrl)) {
       throw new BadRequestException(
         'URL domain banned - provided URL is encoded'
       );
@@ -48,7 +48,7 @@ class ShortUrlService {
 
   static decode(shortUrl: string) {
     // verify if url provided is a `shortUrl`
-    const isShortUrl = isTinyUrl(shortUrl);
+    const isShortUrl = isValidShortUrl(shortUrl);
 
     if (!isShortUrl) {
       throw new BadRequestException('provide a short URL to decode');
