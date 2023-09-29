@@ -8,7 +8,7 @@ import {
 import { BadRequestException, NotFoundException } from '../exceptions/index';
 
 class ShortUrlService {
-  protected static readonly Urls: IUrl[] = [];
+  private static readonly Urls: IUrl[] = [];
 
   static encode(longUrl: string): IUrl {
     const isLongUrl = isValidUrl(longUrl);
