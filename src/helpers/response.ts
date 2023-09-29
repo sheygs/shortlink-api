@@ -1,7 +1,7 @@
 import { type Response } from 'express';
 import logger from './logger';
 import { Status } from '../interfaces/types';
-import config from '../config/config';
+import config from '../config';
 
 export const errorResponse = (
   error: any,
@@ -13,11 +13,12 @@ export const errorResponse = (
     code,
     status: Status.FAILURE,
     error: {
+      id: (res as any).id,
       name: error.name,
-      publicMessage: 'An error occured. Please try again later.',
+      publicMessage: 'An error occured - Please try again later.',
       message: error.message,
-      // we only add a `stack` property in non-production environments
-      ...(config.environment === 'production' ? null : { stack: error.stack })
+      // only add a `stack` property in non-production environments
+      ...(config.ENV === 'production' ? null : { stack: error.stack })
     },
     data: null
   });
