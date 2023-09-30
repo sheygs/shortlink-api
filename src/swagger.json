@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ShortLink RESTFUL API",
+    "description": "ShortLink is a URL shortening api that encodes a long URL and decodes the short URL",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Olusegun Ekoh",
+      "email": "segun.ekoh@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "host": "localhost:8282",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Short Links",
+      "description": "URL Shortener API endpoint for Encoding and Decoding URLs"
+    }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/urls/encode": {
+      "post": {
+        "tags": ["Short Links"],
+        "summary": "Encode a long url",
+        "description": "",
+        "operationId": "EncodeLongUrl",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "longUrl",
+            "in": "body",
+            "description": "long url to encode to short link",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "URL link shortened successfully",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/urls/decode": {
+      "get": {
+        "tags": ["Short Links"],
+        "summary": "Decode a short url link",
+        "description": "",
+        "operationId": "DecodeShortUrl",
+        "parameters": [
+          {
+            "name": "shortUrl",
+            "in": "query",
+            "description": "short url to decode to original Url",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Short Url decoded",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/urls/statistic": {
+      "get": {
+        "tags": ["Short Links"],
+        "summary": "Get Statistics of Short Link Path",
+        "description": "",
+        "operationId": "GetShortLinkStats",
+        "parameters": [
+          {
+            "name": "urlPath",
+            "in": "query",
+            "description": "get statistics of the short link url path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Short link statistics report",
+            "schema": {
+              "type": "object",
+              "$ref": "#"
+            }
+          }
+        }
+      }
+    }
+  }
+}

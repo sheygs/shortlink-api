@@ -10,7 +10,7 @@ class ShortUrlController {
 
       const response = ShortUrlService.encode(longUrl);
 
-      successResponse(res, HttpStatusCode.CREATED, 'URL shortened', response);
+      successResponse(res, HttpStatusCode.CREATED, 'URL Shortened', response);
     } catch (error) {
       next(error);
     }
