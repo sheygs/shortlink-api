@@ -75,10 +75,3 @@ docker build -t ${IMAGETAG} -f Dockerfile .
 ```bash
    $ npm test
 ```
-
-### Evaluation Criteria
-
-- Best Practices
-- SOLID principles
-- Clean Code
-- Tests - (Unit/Integration)
