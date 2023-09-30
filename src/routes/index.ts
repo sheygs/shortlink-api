@@ -3,6 +3,7 @@ import { rateLimit } from 'express-rate-limit';
 import { invalidRoute, baseRoute } from './base';
 import config from '../config';
 import ShortUrlRouter from './url-shortener';
+import UrlAnalyticsRouter from './url-analytics';
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minutes
@@ -18,6 +19,7 @@ const router = Router();
 router.get('/', baseRoute);
 router.use('/api', limiter);
 router.use(`/api/${config.VER}/urls`, ShortUrlRouter);
+router.use(`/api/${config.VER}/url-analytics`, UrlAnalyticsRouter);
 router.all('*', invalidRoute);
 
 export default router;

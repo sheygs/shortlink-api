@@ -1,7 +1,7 @@
 import { type IUrl } from '../interfaces/types';
 import {
   generateTinyUrl,
-  isValidUrl,
+  isValidLongUrl,
   isValidShortUrl,
   generateUUID
 } from '../helpers/utils';
@@ -10,22 +10,22 @@ import { BadRequestException, NotFoundException } from '../exceptions/index';
 class ShortUrlService {
   private static readonly Urls: IUrl[] = [];
 
-  static encode(longUrl: string): IUrl {
-    const isLongUrl = isValidUrl(longUrl);
+  static encode(long: string): IUrl {
+    const isLongUrl = isValidLongUrl(long);
 
     if (!isLongUrl) {
       throw new BadRequestException('Invalid URL provided');
     }
 
     // verify that request url is not an encoded one
-    if (isValidShortUrl(longUrl)) {
+    if (isValidShortUrl(long)) {
       throw new BadRequestException(
         'URL domain banned - provided URL is encoded'
       );
     }
 
-    // has `long Url` been encoded before ?
-    const existingUrl = this.Urls.find((url: IUrl) => url.longUrl === longUrl);
+    // has `longUrl` been encoded before ?
+    const existingUrl = this.findUrl(long);
 
     if (existingUrl) {
       return existingUrl;
@@ -36,7 +36,7 @@ class ShortUrlService {
 
     const url: IUrl = {
       id: generateUUID(),
-      longUrl,
+      longUrl: long,
       shortUrl,
       dateCreated: new Date()
     };
@@ -46,22 +46,30 @@ class ShortUrlService {
     return url;
   }
 
-  static decode(shortUrl: string) {
-    // verify if url provided is a `shortUrl`
-    const isShortUrl = isValidShortUrl(shortUrl);
+  static decode(short: string) {
+    // verify that url provided is a `shortUrl`
+    const isShortUrl = isValidShortUrl(short);
 
     if (!isShortUrl) {
       throw new BadRequestException('provide a short URL to decode');
     }
 
-    // verify if `shortUrl` exists in the data store
-    const url = this.Urls.find((url: IUrl) => url.shortUrl === shortUrl);
+    // verify that `shortUrl` exists in the data store
+    const url = this.findUrl(short);
 
     if (!url) {
       throw new NotFoundException('short URL not found');
     }
 
     return { longUrl: url?.longUrl };
+  }
+
+  private static findUrl(key: string) {
+    return this.Urls.find((url: IUrl) => url.shortUrl === key);
+  }
+
+  static getUrls(): readonly IUrl[] {
+    return this.Urls;
   }
 }
 
