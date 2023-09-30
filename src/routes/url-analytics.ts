@@ -3,7 +3,7 @@ import UrlAnalyticsController from '../controllers/url-analytics';
 
 const UrlAnalyticsRouter = Router();
 
-UrlAnalyticsRouter.route('/statistics').get(
+UrlAnalyticsRouter.route('/statistic').get(
   UrlAnalyticsController.getStatistics
 );
 
