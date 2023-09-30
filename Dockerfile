@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16  AS staging-build
+FROM node:18-alpine3.16  AS stage-build
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY ["package*.json", "tsconfig*.json", "./"]
 
 RUN npm install
 
-COPY --from=staging-build /app/build ./build
+COPY --from=stage-build /app/build ./build
 
 CMD ["npm", "run", "start:prod"]
 
