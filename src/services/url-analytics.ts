@@ -44,7 +44,10 @@ class UrlAnalytics {
 
   // Get the device and browser details on which the
   // user interacted with the short link / url path
-  private static getShortLinkDeviceBrowser(req: Request) {
+  private static getShortLinkDeviceBrowser(req: Request): {
+    browser: parser.IBrowser;
+    device: parser.IDevice;
+  } {
     const ua = parser(req.headers['user-agent']);
 
     const browser = ua.browser;

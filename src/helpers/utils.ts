@@ -11,9 +11,9 @@ export const isValidLongUrl = (url: string = ''): boolean => {
 };
 
 export const isValidShortUrl = (url: string = ''): boolean =>
-  /^http(s)?:\/\/sheygs\.io\/[a-zA-Z0-9]+$/.test(url);
+  /^http(s)?:\/\/short\.est\/[a-zA-Z0-9]+$/.test(url);
 
-export const generateTinyUrl = (): string => `https://sheygs.io/${nanoid(6)}`;
+export const generateTinyUrl = (): string => `https://short.est/${nanoid(6)}`;
 
 // 6 characters url path
 export const isValidUrlPath = (urlPath: string = ''): boolean =>

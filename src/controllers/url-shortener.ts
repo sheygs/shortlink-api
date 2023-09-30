@@ -3,7 +3,7 @@ import { successResponse } from '../helpers/response';
 import ShortUrlService from '../services/url-shortener';
 
 class ShortUrlController {
-  static encode(req: Request, res: Response, next: NextFunction) {
+  static encode(req: Request, res: Response, next: NextFunction): void {
     try {
       const { longUrl } = req.body;
 
@@ -15,7 +15,7 @@ class ShortUrlController {
     }
   }
 
-  static decode(req: Request, res: Response, next: NextFunction) {
+  static decode(req: Request, res: Response, next: NextFunction): void {
     try {
       const { shortUrl } = req.query as any;
 

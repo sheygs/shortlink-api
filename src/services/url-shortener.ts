@@ -32,7 +32,7 @@ class ShortUrlService {
     }
 
     // generate shortUrl
-    const shortUrl = generateTinyUrl();
+    const shortUrl: string = generateTinyUrl();
 
     const url: IUrl = {
       id: generateUUID(),
@@ -46,7 +46,7 @@ class ShortUrlService {
     return url;
   }
 
-  static decode(short: string) {
+  static decode(short: string): { longUrl: string } {
     // verify that url provided is a `shortUrl`
     const isShortUrl = isValidShortUrl(short);
 
@@ -64,7 +64,7 @@ class ShortUrlService {
     return { longUrl: url?.longUrl };
   }
 
-  private static findUrl(key: string) {
+  private static findUrl(key: string): IUrl | undefined {
     return this.Urls.find((url: IUrl) => url.shortUrl === key);
   }
 

@@ -3,7 +3,7 @@ import { successResponse } from '../helpers/response';
 import UrlAnalyticsService from '../services/url-analytics';
 
 class UrlAnalyticsController {
-  static getStatistics(req: Request, res: Response, next: NextFunction) {
+  static getStatistics(req: Request, res: Response, next: NextFunction): void {
     try {
       const response = UrlAnalyticsService.getStatistics(req);
 

@@ -39,7 +39,7 @@ describe('Short Url', () => {
   });
 
   it('should return true when a valid tiny url is passed', () => {
-    const result = isValidShortUrl('https://sheygs.io/dtADab');
+    const result = isValidShortUrl('https://short.est/dtADab');
     expect(result).toEqual(true);
   });
 });
