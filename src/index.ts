@@ -1,3 +1,5 @@
+import 'module-alias/register';
+
 import os from 'os';
 import express, { type Express } from 'express';
 import { middlewares } from './app';

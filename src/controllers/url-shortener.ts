@@ -1,5 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { successResponse } from '../helpers/response';
+import { HttpStatusCode } from '../interfaces/types';
 import ShortUrlService from '../services/url-shortener';
 
 class ShortUrlController {
@@ -9,7 +10,7 @@ class ShortUrlController {
 
       const response = ShortUrlService.encode(longUrl);
 
-      successResponse(res, 201, 'URL shortened', response);
+      successResponse(res, HttpStatusCode.CREATED, 'URL shortened', response);
     } catch (error) {
       next(error);
     }

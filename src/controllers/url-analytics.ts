@@ -1,5 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { successResponse } from '../helpers/response';
+import { HttpStatusCode } from '../interfaces/types';
 import UrlAnalyticsService from '../services/url-analytics';
 
 class UrlAnalyticsController {
@@ -7,7 +8,7 @@ class UrlAnalyticsController {
     try {
       const response = UrlAnalyticsService.getStatistics(req);
 
-      successResponse(res, 200, 'stats. details retrieved', response);
+      successResponse(res, HttpStatusCode.OK, 'Statistics Retrieved', response);
     } catch (error) {
       next(error);
     }
