@@ -59,7 +59,7 @@ NODE_ENV=development
 #### Docker
 
 - Install [Docker](https://www.docker.com/)
-- Run `docker-compose up -d db`. But If you like to see those clumsy logs 😬, RUN `docker-compose up`
+- Run `docker-compose up -d`. But If you like to see those clumsy logs 😬, RUN `docker-compose up`
 - Open browser and visit `http://localhost:8282` and rock it
 
 ### Production Packaging
