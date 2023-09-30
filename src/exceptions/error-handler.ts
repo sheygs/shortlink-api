@@ -1,7 +1,7 @@
 import { APIError } from './index';
 
 class ErrorHandler {
-  public isTrustedError(error: Error) {
+  public isTrustedError(error: Error): boolean {
     if (error instanceof APIError) {
       return error.isOperational;
     }

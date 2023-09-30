@@ -30,16 +30,16 @@ describe('Short Url', () => {
 
   it('should return false when an empty url string is passed', () => {
     const result = isValidShortUrl('');
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('should return false when an invalid tiny url is passed', () => {
     const result = isValidShortUrl('https://mark.agazie/sjeGw');
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('should return true when a valid tiny url is passed', () => {
-    const result = isValidShortUrl('https://sheygs.io/dtADab');
+    const result = isValidShortUrl('https://short.est/dtADab');
     expect(result).toEqual(true);
   });
 });
@@ -47,7 +47,7 @@ describe('Short Url', () => {
 describe('Long Url', () => {
   it('should return false when no argument is passed', () => {
     const result = isValidLongUrl();
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('should return false when an empty url string is passed', () => {
@@ -62,7 +62,7 @@ describe('Long Url', () => {
 
   it('should return true when a valid long url is passed', () => {
     const result = isValidLongUrl('https://indicina.co');
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
   });
 });
 
@@ -79,12 +79,12 @@ describe('Url Path', () => {
 
   it('should return false when the url path is passed is less than 6 characters', () => {
     const result = isValidUrlPath('GeAi9');
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('should return false when the url path is passed is greater than 6 characters', () => {
     const result = isValidUrlPath('GeAi9K_');
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('should return true when the url path is 6 characters', () => {

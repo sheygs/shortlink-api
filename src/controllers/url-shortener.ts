@@ -1,21 +1,22 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { successResponse } from '../helpers/response';
+import { HttpStatusCode } from '../interfaces/types';
 import ShortUrlService from '../services/url-shortener';
 
 class ShortUrlController {
-  static encode(req: Request, res: Response, next: NextFunction) {
+  static encode(req: Request, res: Response, next: NextFunction): void {
     try {
       const { longUrl } = req.body;
 
       const response = ShortUrlService.encode(longUrl);
 
-      successResponse(res, 201, 'URL shortened', response);
+      successResponse(res, HttpStatusCode.CREATED, 'URL shortened', response);
     } catch (error) {
       next(error);
     }
   }
 
-  static decode(req: Request, res: Response, next: NextFunction) {
+  static decode(req: Request, res: Response, next: NextFunction): void {
     try {
       const { shortUrl } = req.query as any;
 
