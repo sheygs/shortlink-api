@@ -1,7 +1,6 @@
 import { type Response } from 'express';
 import logger from './logger';
 import { Status } from '../interfaces/types';
-// import config from '../config';
 
 export const errorResponse = (
   error: any,
