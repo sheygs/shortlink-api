@@ -1,7 +1,7 @@
 import { type IUrl } from '../interfaces/types';
 import {
   generateTinyUrl,
-  isValidUrl,
+  isValidLongUrl,
   isValidShortUrl,
   generateUUID
 } from '../helpers/utils';
@@ -11,7 +11,7 @@ class ShortUrlService {
   private static readonly Urls: IUrl[] = [];
 
   static encode(long: string): IUrl {
-    const isLongUrl = isValidUrl(long);
+    const isLongUrl = isValidLongUrl(long);
 
     if (!isLongUrl) {
       throw new BadRequestException('Invalid URL provided');
@@ -66,6 +66,10 @@ class ShortUrlService {
 
   private static findUrl(key: string) {
     return this.Urls.find((url: IUrl) => url.shortUrl === key);
+  }
+
+  static getUrls(): readonly IUrl[] {
+    return this.Urls;
   }
 }
 

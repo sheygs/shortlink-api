@@ -1,8 +1,9 @@
 import {
   generateUUID,
   isValidShortUrl,
-  isValidUrl,
-  generateTinyUrl
+  isValidLongUrl,
+  generateTinyUrl,
+  isValidUrlPath
 } from '../src/helpers/utils';
 
 describe('RequestId', () => {
@@ -21,7 +22,7 @@ describe('Generate Short Link', () => {
   });
 });
 
-describe('Valid Short Url', () => {
+describe('Short Url', () => {
   it('should return false when no argument is passed', () => {
     const result = isValidShortUrl();
     expect(result).toEqual(false);
@@ -43,24 +44,51 @@ describe('Valid Short Url', () => {
   });
 });
 
-describe('Valid Long Url', () => {
+describe('Long Url', () => {
   it('should return false when no argument is passed', () => {
-    const result = isValidUrl();
+    const result = isValidLongUrl();
     expect(result).toEqual(false);
   });
 
   it('should return false when an empty url string is passed', () => {
-    const result = isValidUrl('');
+    const result = isValidLongUrl('');
     expect(result).toEqual(false);
   });
 
   it('should return false when an invalid long url is passed', () => {
-    const result = isValidUrl('http://cat');
+    const result = isValidLongUrl('http://cat');
     expect(result).toEqual(false);
   });
 
   it('should return true when a valid long url is passed', () => {
-    const result = isValidUrl('https://indicina.co');
+    const result = isValidLongUrl('https://indicina.co');
+    expect(result).toEqual(true);
+  });
+});
+
+describe('Url Path', () => {
+  it('should return false when no argument is passed', () => {
+    const result = isValidUrlPath();
+    expect(result).toEqual(false);
+  });
+
+  it('should return false when an empty url string is passed', () => {
+    const result = isValidUrlPath('');
+    expect(result).toEqual(false);
+  });
+
+  it('should return false when the url path is passed is less than 6 characters', () => {
+    const result = isValidUrlPath('GeAi9');
+    expect(result).toEqual(false);
+  });
+
+  it('should return false when the url path is passed is greater than 6 characters', () => {
+    const result = isValidUrlPath('GeAi9K_');
+    expect(result).toEqual(false);
+  });
+
+  it('should return true when the url path is 6 characters', () => {
+    const result = isValidUrlPath('GeAi9K');
     expect(result).toEqual(true);
   });
 });

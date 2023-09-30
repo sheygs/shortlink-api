@@ -18,9 +18,24 @@ export enum HttpStatusCode {
   CONFLICT = 409
 }
 
+interface IBrowser {
+  name?: string;
+  version?: string;
+  major?: string;
+}
+
+interface IDevice {
+  vendor?: string;
+  model?: string;
+  type?: string;
+}
+
 export interface IUrl {
   id: string;
   longUrl: string;
   shortUrl: string;
   dateCreated: Date;
+  clicks?: number;
+  browser?: IBrowser;
+  device?: IDevice;
 }
