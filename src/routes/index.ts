@@ -19,7 +19,7 @@ const router = Router();
 router.get('/', baseRoute);
 router.use('/api', limiter);
 router.use(`/api/${config.VER}/urls`, ShortUrlRouter);
-router.use(`/api/${config.VER}/url-analytics`, UrlAnalyticsRouter);
+router.use(`/api/${config.VER}/urls`, UrlAnalyticsRouter);
 router.all('*', invalidRoute);
 
 export default router;
