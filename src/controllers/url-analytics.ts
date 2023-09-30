@@ -8,7 +8,12 @@ class UrlAnalyticsController {
     try {
       const response = UrlAnalyticsService.getStatistics(req);
 
-      successResponse(res, HttpStatusCode.OK, 'Statistics Retrieved', response);
+      successResponse(
+        res,
+        HttpStatusCode.OK,
+        'Short Link Statistics',
+        response
+      );
     } catch (error) {
       next(error);
     }

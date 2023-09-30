@@ -1,4 +1,5 @@
 import express, { type Application } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import helmet from 'helmet';
 import compression from 'compression';
 import morgan from 'morgan';
@@ -8,6 +9,8 @@ import { baseRoute } from './routes/base';
 import indexRoute from './routes/index';
 import generateRequestId from './middlewares/request-id';
 import { globalErrorHandler } from './middlewares/error';
+
+import swaggerDocument from './swagger.json';
 
 export const middlewares = (app: Application) => {
   app.enable('trust proxy');
@@ -31,6 +34,8 @@ export const middlewares = (app: Application) => {
   app.get('/', baseRoute);
 
   app.use(generateRequestId());
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   app.use(indexRoute);
 
