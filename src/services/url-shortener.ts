@@ -25,7 +25,7 @@ class ShortUrlService {
     }
 
     // has `longUrl` been encoded before ?
-    const existingUrl = this.findUrl(long);
+    const existingUrl = this.findUrl(long, 'LONG');
 
     if (existingUrl) {
       return existingUrl;
@@ -55,7 +55,7 @@ class ShortUrlService {
     }
 
     // verify that `shortUrl` exists in the data store
-    const url = this.findUrl(short);
+    const url = this.findUrl(short, 'SHORT');
 
     if (!url) {
       throw new NotFoundException('short URL not found');
@@ -64,8 +64,12 @@ class ShortUrlService {
     return { longUrl: url?.longUrl };
   }
 
-  private static findUrl(key: string): IUrl | undefined {
-    return this.Urls.find((url: IUrl) => url.shortUrl === key);
+  private static findUrl(key: string, type?: string): IUrl | undefined {
+    if (type === 'SHORT') {
+      return this.Urls.find((url: IUrl) => url.shortUrl === key);
+    }
+
+    return this.Urls.find((url: IUrl) => url.longUrl === key);
   }
 
   static getUrls(): readonly IUrl[] {

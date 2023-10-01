@@ -1,6 +1,6 @@
 ### shortlink-api
 
-> ShortLink is a URL shortening service.
+> Short link is a URL shortening service.
 
 ### Overview
 
@@ -34,7 +34,7 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 ### Rename _.env.sample_ to _.env_ and replace the placeholders
 
 ```bash
-PORT=8282
+PORT=XXXX
 NODE_ENV=development
 ```
 
@@ -54,13 +54,13 @@ NODE_ENV=development
 
 - Run `npm install` to install project dependencies
 - Run `npm run dev` to run the services and you are good
-- Open browser and visit `http://localhost:8282` and rock it
+- Open browser and visit `http://localhost:8282`
 
 #### Docker
 
 - Install [Docker](https://www.docker.com/)
 - Run `docker-compose up -d`. But If you like to see those clumsy logs 😬, RUN `docker-compose up`
-- Open browser and visit `http://localhost:8282` and rock it
+- Open browser and visit `http://localhost:8282`
 
 ### Production Packaging
 
