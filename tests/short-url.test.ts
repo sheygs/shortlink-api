@@ -1,7 +1,5 @@
 import request from 'supertest';
 import server from '../src/index';
-// import Urls from './data/shortUrls.json';
-// import ShortUrlService from '../src/services/url-shortener';
 
 const url = '/api/v1/urls';
 
