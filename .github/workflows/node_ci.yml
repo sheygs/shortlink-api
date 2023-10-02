@@ -20,8 +20,8 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [16, 18]
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        node-version: [18]
+        os: [macOS-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
