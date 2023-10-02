@@ -1,14 +1,14 @@
 import { type IUrl } from '../interfaces/types';
+import { BadRequestException, NotFoundException } from '../exceptions/index';
 import {
   generateTinyUrl,
   isValidLongUrl,
   isValidShortUrl,
   generateUUID
 } from '../helpers/utils';
-import { BadRequestException, NotFoundException } from '../exceptions/index';
 
 class ShortUrlService {
-  private static readonly Urls: IUrl[] = [];
+  private static readonly urls: IUrl[] = [];
 
   static encode(long: string): IUrl {
     const isLongUrl = isValidLongUrl(long);
@@ -17,14 +17,14 @@ class ShortUrlService {
       throw new BadRequestException('Invalid URL provided');
     }
 
-    // verify that request url is not an encoded one
+    // verify that requested url is not an encoded one
     if (isValidShortUrl(long)) {
       throw new BadRequestException(
         'URL domain banned - provided URL is encoded'
       );
     }
 
-    // has `longUrl` been encoded before ?
+    // `longUrl` been encoded before ?
     const existingUrl = this.findUrl(long, 'LONG');
 
     if (existingUrl) {
@@ -38,10 +38,10 @@ class ShortUrlService {
       id: generateUUID(),
       longUrl: long,
       shortUrl,
-      dateCreated: new Date()
+      dateCreated: new Date().toISOString()
     };
 
-    this.Urls.push(url);
+    this.urls.push(url);
 
     return url;
   }
@@ -64,16 +64,16 @@ class ShortUrlService {
     return { longUrl: url?.longUrl };
   }
 
-  private static findUrl(key: string, type?: string): IUrl | undefined {
+  private static findUrl(key: string, type: string): IUrl | undefined {
     if (type === 'SHORT') {
-      return this.Urls.find((url: IUrl) => url.shortUrl === key);
+      return this.urls.find((url: IUrl) => url.shortUrl === key);
     }
 
-    return this.Urls.find((url: IUrl) => url.longUrl === key);
+    return this.urls.find((url: IUrl) => url.longUrl === key);
   }
 
   static getUrls(): readonly IUrl[] {
-    return this.Urls;
+    return this.urls;
   }
 }
 

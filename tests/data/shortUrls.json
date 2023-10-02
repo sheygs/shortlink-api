@@ -1,13 +1,4 @@
 {
-  "code": 201,
-  "status": "success",
-  "message": "URL Shortened",
-  "data": {
-    "id": "908fde83-3d75-4ef5-b93f-40067c2e7595",
-    "longUrl": "https://indicina.co",
-    "shortUrl": "https://short.est/WaBdjm",
-    "dateCreated": "2023-09-30T19:23:26.853Z"
-  },
   "results": [
     {
       "id": "908fde83-3d75-4ef5-b93f-40067c2e7595",

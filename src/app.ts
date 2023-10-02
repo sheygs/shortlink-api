@@ -7,6 +7,7 @@ import cors from 'cors';
 import config from './config';
 import { baseRoute } from './routes/base';
 import indexRoute from './routes/index';
+import { limiter } from './helpers/rate-limit';
 import generateRequestId from './middlewares/request-id';
 import { globalErrorHandler } from './middlewares/error';
 
@@ -21,17 +22,18 @@ export const middlewares = (app: Application) => {
   app.use(compression());
   app.use(cors());
   app.use(express.json());
-
-  if (config.ENV !== 'test') {
-    app.use(morgan('dev'));
-  }
-
   app.use(express.urlencoded({ extended: false }));
+
   app.use(helmet());
   app.disable('x-powered-by');
 
   // base route
   app.get('/', baseRoute);
+
+  if (config.ENV !== 'test') {
+    app.use('/api', limiter);
+    app.use(morgan('dev'));
+  }
 
   app.use(generateRequestId());
 
