@@ -14,7 +14,7 @@ class UrlAnalytics {
     }
 
     // search and extract the `urlPath` amongst the list of urls
-    const url = ShortUrlService.getUrls().find((url: IUrl) => {
+    const url = ShortUrlService.urlLinks.find((url: IUrl) => {
       const parts = url?.shortUrl?.split('/');
 
       const existingUrlPath = parts[parts.length - 1];
