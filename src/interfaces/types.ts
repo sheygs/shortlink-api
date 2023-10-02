@@ -34,7 +34,7 @@ export interface IUrl {
   id: string;
   longUrl: string;
   shortUrl: string;
-  dateCreated: Date;
+  dateCreated: string;
   clicks?: number;
   browser?: IBrowser;
   device?: IDevice;

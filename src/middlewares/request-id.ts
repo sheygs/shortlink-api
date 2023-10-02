@@ -15,8 +15,7 @@ declare global {
 
 const generateRequestId = () => {
   return (req: Request, res: Response, next: NextFunction) => {
-    req.id = generateUUID();
-    res.id = req.id;
+    res.id = req.id = generateUUID();
     next();
   };
 };
