@@ -27,6 +27,7 @@
     "prod": "cross-env NODE_ENV=production npm-run-all --sequential prebuild build start:prod",
     "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles",
     "test:watch": "cross-env NODE_ENV=test jest --runInBand --watch",
+    "test:cov": "cross-env NODE_ENV=test jest --coverage",
     "precommit": "npm-run-all --sequential lint:fix prettify test",
     "prepush": "npm run lint:check"
   },

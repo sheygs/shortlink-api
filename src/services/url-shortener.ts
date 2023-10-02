@@ -72,7 +72,7 @@ class ShortUrlService {
     return this.urls.find((url: IUrl) => url.longUrl === key);
   }
 
-  static getUrls(): readonly IUrl[] {
+  static get urlLinks(): IUrl[] {
     return this.urls;
   }
 }
