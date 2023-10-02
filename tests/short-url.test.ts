@@ -74,16 +74,6 @@ describe('GET /decode', () => {
     shortUrl = serverResp?.body?.data?.shortUrl;
   });
 
-  it('should redirect short url to original/long url', async () => {
-    const response = await request(server).get(`${url}/decode`).query({
-      shortUrl
-    });
-
-    expect(response.status).toBe(302);
-    expect(response.headers.location).toEqual(longUrl);
-    expect(response.redirect).toEqual(true);
-  });
-
   it('should return an error for an empty short url string', async () => {
     const response = await request(server).get(`${url}/decode`).query({
       shortUrl: ''
@@ -154,6 +144,16 @@ describe('GET /decode', () => {
         message: expect.any(String)
       })
     );
+  });
+
+  it('should redirect short url to original/long url', async () => {
+    const response = await request(server).get(`${url}/decode`).query({
+      shortUrl
+    });
+
+    expect(response.status).toBe(302);
+    expect(response.headers.location).toEqual(longUrl);
+    expect(response.redirect).toEqual(true);
   });
 });
 
