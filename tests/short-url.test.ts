@@ -157,7 +157,7 @@ describe('GET /decode', () => {
   });
 });
 
-describe('GET /statistics', () => {
+describe('GET /statistic', () => {
   let serverResp;
   let urlPath: string;
   const longUrl: string = 'https://indicina.co';
