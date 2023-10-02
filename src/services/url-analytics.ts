@@ -20,8 +20,9 @@ class UrlAnalytics {
       const existingUrlPath = parts[parts.length - 1];
 
       if (urlPath === existingUrlPath) {
-        // increment click on `shortUrl`
-        url.clicks = url.clicks ? ++url.clicks : 1;
+        // increment click counts on `shortUrl`
+        url.clicks = this.incrementClick(url.clicks);
+
         return url;
       }
 
@@ -42,17 +43,17 @@ class UrlAnalytics {
     return url;
   }
 
+  private static incrementClick(clickCount: number | undefined) {
+    return clickCount ? ++clickCount : 1;
+  }
+
   // Get the device and browser details on which the
   // user interacted with the short link / url path
   private static getShortLinkDeviceBrowser(req: Request): {
     browser: parser.IBrowser;
     device: parser.IDevice;
   } {
-    const ua = parser(req.headers['user-agent']);
-
-    const browser = ua.browser;
-
-    const device = ua.device;
+    const { browser, device } = parser(req.headers['user-agent']);
 
     return {
       browser,

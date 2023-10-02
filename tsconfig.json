@@ -44,6 +44,6 @@
       "@config/*": ["config/*"]
     }
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./tests/**/*", "commitlint.config.js"],
   "exclude": ["node_modules"]
 }

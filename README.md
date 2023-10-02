@@ -1,6 +1,6 @@
 ### shortlink-api
 
-> ShortLink is a URL shortening service.
+> Short link is a URL shortening service.
 
 ### Overview
 
@@ -14,6 +14,10 @@ long URL. Using the example above, visiting `http://short.est/GeAi9K` should red
 - `decode`: Decodes a shortened URL to its original URL
 - `statistic/{url_path}`: Return the basic statistics of a short URL path. Using the above link, `url_path` will be `GeAi9K`.
 
+### Project Structure
+
+Overall, the project is designed to be scalable, maintainable and extensible. The use of a monolithic architecture that can easily spin off to a micro-service following modular architecture pattern that promotes code organization and separation of concerns.
+
 ### Tech Stack
 
 - [TypeScript](https://www.typescriptlang.org/)
@@ -21,17 +25,53 @@ long URL. Using the example above, visiting `http://short.est/GeAi9K` should red
 - [Express](https://www.npmjs.com/package/express)
 - [Jest](https://www.npmjs.com/package/jest)
 
-### Installation
+### Requirements
 
-### Documentation
+- [Docker](https://www.docker.com/)
+- [Postman](https://www.postman.com/downloads/)
+- [Git](https://git-scm.com/downloads)
 
-### Evaluation Criteria
+### Rename _.env.sample_ to _.env_ and replace the placeholders
 
-- Best Practices
-- SOLID principles
-- Clean Code
-- Tests - (Unit/Integration)
+```bash
+PORT=XXXX
+NODE_ENV=development
+```
 
-### Timeline
+### Postman Documentation
 
-- 1 week
+- Navigate to `http://localhost:8282/api-docs` on your computer to view the openapi documentation.
+
+### Installation 📦
+
+#### Without Docker
+
+```bash
+   $ git clone https://github.com/sheygs13/shortlink-api.git
+   $ cd shortlink-api
+   $ npm install
+```
+
+- Run `npm install` to install project dependencies
+- Run `npm run dev` to run the services and you are good
+- Open browser and visit `http://localhost:8282`
+
+#### Docker
+
+- Install [Docker](https://www.docker.com/)
+- Run `docker-compose up -d`. But If you like to see those clumsy logs 😬, RUN `docker-compose up`
+- Open browser and visit `http://localhost:8282`
+
+### Production Packaging
+
+- RUN `npm run prod` to start the production build
+
+```
+docker build -t ${IMAGETAG} -f Dockerfile .
+```
+
+### Test
+
+```bash
+   $ npm test
+```
