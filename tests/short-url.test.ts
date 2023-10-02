@@ -63,7 +63,7 @@ describe('POST /encode ', () => {
 
 describe('GET /decode', () => {
   let serverResp;
-  let shortUrl: string;
+  let short: string;
   const longUrl: string = 'https://indicina.co';
 
   beforeEach(async () => {
@@ -71,7 +71,17 @@ describe('GET /decode', () => {
       longUrl
     });
 
-    shortUrl = serverResp?.body?.data?.shortUrl;
+    short = serverResp?.body?.data?.shortUrl;
+  });
+
+  it('should redirect short url to original/long url', async () => {
+    const response = await request(server).get(`${url}/decode`).query({
+      shortUrl: short
+    });
+
+    expect(response.status).toBe(302);
+    expect(response.headers.location).toEqual(longUrl);
+    expect(response.redirect).toEqual(true);
   });
 
   it('should return an error for an empty short url string', async () => {
@@ -144,16 +154,6 @@ describe('GET /decode', () => {
         message: expect.any(String)
       })
     );
-  });
-
-  it('should redirect short url to original/long url', async () => {
-    const response = await request(server).get(`${url}/decode`).query({
-      shortUrl
-    });
-
-    expect(response.status).toBe(302);
-    expect(response.headers.location).toEqual(longUrl);
-    expect(response.redirect).toEqual(true);
   });
 });
 
