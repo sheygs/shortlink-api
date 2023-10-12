@@ -19,12 +19,16 @@ export const middlewares = (app: Application) => {
   app.set('port', config.PORT);
 
   // built-in middlewares
-  app.use(compression());
+
+  if (config.ENV === 'production') {
+    app.use(compression());
+    app.use(helmet());
+  }
+
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
-  app.use(helmet());
   app.disable('x-powered-by');
 
   // base route
