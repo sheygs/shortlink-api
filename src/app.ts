@@ -50,3 +50,8 @@ export const middlewares = (app: Application) => {
   // default error middleware
   globalErrorHandler(app);
 };
+
+const app = express();
+middlewares(app);
+
+export default app;

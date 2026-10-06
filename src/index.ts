@@ -1,12 +1,7 @@
 import os from 'os';
-import express, { type Express } from 'express';
-import { middlewares } from './app';
+import app from './app';
 import logger from './helpers/logger';
 import config from './config';
-
-const app: Express = express();
-
-middlewares(app);
 
 const port: string | number = app.get('port');
 
