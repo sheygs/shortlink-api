@@ -7,11 +7,13 @@
     "target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "experimentalDecorators": true /* Enable experimental support for legacy experimental decorators. */,
     "emitDecoratorMetadata": true /* Emit design-type metadata for decorated declarations in source files. */,
-    "module": "commonjs" /* Specify what module code is generated. */,
+    "module": "Node16" /* Specify what module code is generated. */,
     "outDir": "build" /* Specify an output folder for all emitted files. */,
     "pretty": true,
     "removeComments": true /* Disable emitting comments. */,
     "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["node", "jest"],
 
     /* Strict Type-Checking */
     "strict": true /* Enable all strict type-checking options. */,
@@ -28,22 +30,12 @@
 
     /* Module Resolution Options */
 
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
-    "baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
-    "paths": {
-      "@exceptions/*": ["exceptions/*"],
-      "@controllers/*": ["controllers/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"],
-      "@services/*": ["services/*"],
-      "@helpers/*": ["helpers/*"],
-      "@config/*": ["config/*"]
-    }
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */
+
   },
   "include": ["./src/**/*", "./tests/**/*", "commitlint.config.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build", "coverage"]
 }

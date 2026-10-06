@@ -10,10 +10,8 @@ import {
 class ShortUrlService {
   private static readonly urls: IUrl[] = [];
 
-  static encode(long: string): IUrl {
-    const isLongUrl = isValidLongUrl(long);
-
-    if (!isLongUrl) {
+  static encode(long: unknown): IUrl {
+    if (!isValidLongUrl(long)) {
       throw new BadRequestException('Invalid URL provided');
     }
 
@@ -32,7 +30,10 @@ class ShortUrlService {
     }
 
     // generate shortUrl
-    const shortUrl: string = generateTinyUrl();
+    let shortUrl: string;
+    do {
+      shortUrl = generateTinyUrl();
+    } while (this.findUrl(shortUrl, 'SHORT'));
 
     const url: IUrl = {
       id: generateUUID(),
@@ -46,11 +47,9 @@ class ShortUrlService {
     return url;
   }
 
-  static decode(short: string): { longUrl: string } {
+  static decode(short: unknown): { longUrl: string } {
     // verify that url provided is a `shortUrl`
-    const isShortUrl = isValidShortUrl(short);
-
-    if (!isShortUrl) {
+    if (!isValidShortUrl(short)) {
       throw new BadRequestException('provide a short URL to decode');
     }
 

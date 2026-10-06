@@ -17,8 +17,14 @@ export const globalErrorHandler = (app: Application) =>
 
     logger.info(JSON.stringify({ isTrusted }));
 
-    const statusCode: HttpStatusCode =
-      error.httpStatusCode ?? HttpStatusCode.BAD_REQUEST;
+    const parserError = error as APIError & { type?: string };
+    const statusCode = isTrusted
+      ? error.httpStatusCode
+      : parserError.type === 'entity.too.large'
+        ? 413
+        : parserError.type === 'entity.parse.failed'
+          ? HttpStatusCode.BAD_REQUEST
+          : HttpStatusCode.INTERNAL_SERVER_ERROR;
 
     errorResponse(error, res, statusCode);
   });

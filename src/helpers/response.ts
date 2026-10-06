@@ -13,11 +13,16 @@ export const errorResponse = (
     status: Status.FAILURE,
     error: {
       id: (res as any).id,
-      name: error.name,
+      name: code >= 500 ? 'INTERNAL_SERVER_ERROR' : error.name,
       publicMessage: 'An error occured - Please try again later.',
-      message: error.message
-      // only add a `stack` property in non-production environments
-      // ...(config.ENV === 'production' ? null : { stack: error.stack })
+      message:
+        code >= 500
+          ? 'Internal Server Error'
+          : code === 413
+            ? 'Request body too large'
+            : error.type === 'entity.parse.failed'
+              ? 'Invalid JSON body'
+              : error.message
     },
     data: null
   });

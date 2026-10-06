@@ -1,0 +1,12 @@
+node_modules
+build
+.git
+.github
+.husky
+.env
+.env.*
+!.env.sample
+*.log
+coverage
+tests
+*.tsbuildinfo

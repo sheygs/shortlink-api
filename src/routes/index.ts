@@ -10,6 +10,6 @@ router.get('/', baseRoute);
 
 router.use(`/api/${config.VER}/urls`, ShortUrlRouter);
 router.use(`/api/${config.VER}/urls`, UrlAnalyticsRouter);
-router.all('*', invalidRoute);
+router.use(invalidRoute);
 
 export default router;

@@ -6,7 +6,7 @@ import ShortUrlService from '../services/url-shortener';
 class ShortUrlController {
   static encode(req: Request, res: Response, next: NextFunction): void {
     try {
-      const { longUrl } = req.body;
+      const longUrl = req.body?.longUrl;
 
       const response = ShortUrlService.encode(longUrl);
 
@@ -18,7 +18,7 @@ class ShortUrlController {
 
   static decode(req: Request, res: Response, next: NextFunction): void {
     try {
-      const { shortUrl } = req.query as any;
+      const { shortUrl } = req.query;
 
       const { longUrl } = ShortUrlService.decode(shortUrl);
 
