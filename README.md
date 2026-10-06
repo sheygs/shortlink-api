@@ -27,6 +27,7 @@ Overall, the project is designed to be scalable, maintainable and extensible. Th
 
 ### Requirements
 
+- Node.js 24 LTS (see `.nvmrc`)
 - [Docker](https://www.docker.com/)
 - [Postman](https://www.postman.com/downloads/)
 - [Git](https://git-scm.com/downloads)
@@ -75,3 +76,21 @@ docker build -t ${IMAGETAG} -f Dockerfile .
 ```bash
    $ npm test
 ```
+
+### Security and deployment
+
+Only absolute HTTP(S) URLs up to 2048 characters are accepted. Credentials,
+control characters, and malformed input are rejected. Request bodies are limited
+to 16 KiB. API requests are limited to five per minute per client IP.
+
+Proxy headers are untrusted by default. When deploying behind a reverse proxy,
+configure Express's `trust proxy` with the specific proxy addresses for your
+network before relying on forwarded client IPs. Never enable unrestricted trust.
+
+Docker runs as the `node` user with production dependencies only; Compose uses
+a read-only filesystem and drops Linux capabilities. Logs go to stdout/stderr.
+The in-memory URL store is process-local and resets on restart.
+
+CI checks formatting, lint, compilation, tests, dependencies, and container startup.
+The scoped `js-yaml` override removes the vulnerable legacy YAML parser used by
+Jest's coverage config loader; the loader uses the compatible `load` API.

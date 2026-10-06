@@ -1,4 +1,4 @@
-import app from '../src/index';
+import app from '../src/app';
 
 import request from 'supertest';
 
@@ -16,8 +16,4 @@ describe('Application Health', () => {
     expect(response.body.status).toBe('failure');
     expect(response.body.error.message).toEqual('Unable to find /me');
   });
-});
-
-afterAll(() => {
-  app.close();
 });

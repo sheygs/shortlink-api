@@ -7,7 +7,7 @@ import { BadRequestException, NotFoundException } from '../exceptions/index';
 
 class UrlAnalytics {
   static getStatistics(req: Request): IUrl {
-    const { urlPath } = req.query as any;
+    const { urlPath } = req.query;
 
     if (!isValidUrlPath(urlPath)) {
       throw new BadRequestException('url path must be 6 characters');
@@ -44,7 +44,7 @@ class UrlAnalytics {
   }
 
   private static incrementClick(clickCount: number | undefined) {
-    return clickCount ? ++clickCount : 1;
+    return (clickCount ?? 0) + 1;
   }
 
   // Get the device and browser details on which the

@@ -1,5 +1,5 @@
 import request from 'supertest';
-import server from '../src/index';
+import server from '../src/app';
 
 const url = '/api/v1/urls';
 
@@ -224,8 +224,4 @@ describe('GET /statistic', () => {
       })
     );
   });
-});
-
-afterAll(() => {
-  server.close();
 });

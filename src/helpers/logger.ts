@@ -22,9 +22,7 @@ const formatOptions: {
 const logger: winston.Logger = winston.createLogger({
   ...formatOptions,
   transports: [
-    // - Write all logs with level `error` and below to `error.log`
-    // - Write all logs with level `info` and below to console
-    new transports.File({ filename: 'error.log', level: 'error' }),
+    // Containers collect logs from stdout/stderr.
     new transports.Console({ level: 'info' })
   ]
 });

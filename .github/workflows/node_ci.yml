@@ -3,31 +3,45 @@ name: Node.js CI
 on: [push, pull_request]
 
 permissions:
-  contents: read #  to fetch code (actions/checkout)
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  lint:
+  checks:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          node-version: 18
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run prettify:check
       - run: npm run lint:check
+      - run: npm run build
+      - run: npm run test:cov
+      - run: npm audit --audit-level=low
 
-  test:
-    strategy:
-      matrix:
-        node-version: [18]
-        os: [ubuntu-latest, macOS-latest]
-    runs-on: ${{ matrix.os }}
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm --version
-      - run: npm ci --ignore-scripts
-      - run: npm test
+          persist-credentials: false
+      - run: docker build --pull -t shortlink-api:ci .
+      - name: Check container health
+        run: |
+          docker run -d --name api --read-only --cap-drop ALL --security-opt no-new-privileges --publish 127.0.0.1:8282:8282 shortlink-api:ci
+          trap 'docker logs api; docker rm -f api' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8282/; then exit 0; fi
+            sleep 2
+          done
+          exit 1
